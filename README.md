@@ -1,7 +1,8 @@
 # Aya Waya
 
 Sinhala "budget relief" form. Submitting it shows an image and saves the person's
-name, network, phone number and time.
+name, network, phone number and time. Opening the page is also logged (time,
+rough location, device, referrer, IP), with obvious bots filtered out.
 
 ## Setup on Vercel
 
@@ -15,4 +16,5 @@ name, network, phone number and time.
 https://<your-site>.vercel.app/admin?key=<ADMIN_KEY>
 ```
 
-Add `&format=csv` (or click **Download CSV**) to get an Excel-friendly file.
+The admin page shows two tables: **Submissions** (people who filled the form)
+and **Clicks** (everyone who opened the page). Each has a **Download CSV** link.

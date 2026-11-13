@@ -125,6 +125,16 @@
 </div>
 
 <script>
+  // Log that the page was opened (best-effort; only the referrer comes from the browser).
+  try {
+    fetch('/api/visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: document.referrer || '' }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch (e) { /* ignore */ }
+
   const form = document.getElementById('form');
   const button = form.querySelector('button');
 
