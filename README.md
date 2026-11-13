@@ -1,7 +1,7 @@
 # Aya Waya
 
 Sinhala "budget relief" form. Submitting it shows an image and saves the person's
-name, network and time. The phone number is never sent or stored.
+name, network, phone number and time.
 
 ## Setup on Vercel
 

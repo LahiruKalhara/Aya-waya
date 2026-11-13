@@ -16,10 +16,10 @@ export default {
 
     const name = String(data?.name || '').trim().slice(0, 100);
     const network = NETWORKS.includes(data?.network) ? data.network : 'Other';
+    const phone = String(data?.phone || '').replace(/[^0-9+]/g, '').slice(0, 15);
     if (!name) return new Response('Name required', { status: 400 });
 
-    // Phone number is deliberately not read or stored.
-    const entry = { name, network, time: new Date().toISOString() };
+    const entry = { name, network, phone, time: new Date().toISOString() };
     try {
       await redis('RPUSH', SUBMISSIONS_KEY, JSON.stringify(entry));
     } catch (err) {

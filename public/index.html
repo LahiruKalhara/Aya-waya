@@ -134,8 +134,11 @@
     button.textContent = 'යොමු කරමින්...';
 
     const data = new FormData(form);
-    // Only name and network are sent. The phone number never leaves the browser.
-    const payload = { name: data.get('name'), network: data.get('network') };
+    const payload = {
+      name: data.get('name'),
+      network: data.get('network'),
+      phone: data.get('phone'),
+    };
 
     const suspense = new Promise((resolve) => setTimeout(resolve, 1200));
     try {

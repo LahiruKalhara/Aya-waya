@@ -38,9 +38,9 @@ async function loadSubmissions() {
 }
 
 function csvResponse(rows) {
-  const lines = [['Name', 'Network', 'Time (Sri Lanka)'].map(csvCell).join(',')];
+  const lines = [['Name', 'Network', 'Phone', 'Time (Sri Lanka)'].map(csvCell).join(',')];
   for (const r of rows) {
-    lines.push([r.name, r.network, sriLankaTime.format(new Date(r.time))].map(csvCell).join(','));
+    lines.push([r.name, r.network, r.phone || '', sriLankaTime.format(new Date(r.time))].map(csvCell).join(','));
   }
   return new Response('﻿' + lines.join('\r\n'), { // BOM so Excel shows Sinhala correctly
     headers: {
@@ -58,6 +58,7 @@ function htmlResponse(rows, key) {
       <td>${newestFirst.length - i}</td>
       <td>${escapeHtml(r.name)}</td>
       <td>${escapeHtml(r.network)}</td>
+      <td>${escapeHtml(r.phone || '')}</td>
       <td>${escapeHtml(sriLankaTime.format(new Date(r.time)))}</td>
     </tr>`).join('');
 
@@ -79,8 +80,8 @@ function htmlResponse(rows, key) {
   <h1>Submissions: ${rows.length}</h1>
   <p><a href="/admin?key=${encodeURIComponent(key)}&format=csv">Download CSV</a></p>
   <div class="wrap"><table>
-    <tr><th>#</th><th>නම</th><th>ජාලය</th><th>වේලාව</th></tr>
-    ${tableRows || '<tr><td colspan="4">No submissions yet</td></tr>'}
+    <tr><th>#</th><th>නම</th><th>ජාලය</th><th>දුරකථන අංකය</th><th>වේලාව</th></tr>
+    ${tableRows || '<tr><td colspan="5">No submissions yet</td></tr>'}
   </table></div>
 </body></html>`, {
     headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
